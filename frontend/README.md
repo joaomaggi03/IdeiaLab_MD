@@ -1,16 +1,169 @@
-# React + Vite
+# IdeiaLab MD — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend da plataforma **IdeiaLab MD**, desenvolvida para centralizar, organizar e acompanhar ideias relacionadas ao projeto **Meninas Digitais**.
 
-Currently, two official plugins are available:
+A aplicação permite futuramente cadastrar ideias, visualizar propostas, votar, acompanhar status e interagir com os conteúdos da plataforma.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Tecnologias
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* Vite
+* JavaScript
+* HTML5
+* CSS3
+* React Router
+* Google Fonts
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Estrutura do projeto
+
+```text
+frontend/
+├── public/
+├── src/
+│   ├── assets/
+│   │   └── logo-ideialab.png
+│   │
+│   ├── components/
+│   │
+│   ├── pages/
+│   │   ├── Login/
+│   │   │   ├── Login.jsx
+│   │   │   └── Login.css
+│   │   │
+│   │   ├── Cadastro/
+│   │   ├── Listagem/
+│   │   ├── Detalhe/
+│   │   ├── NovaIdeia/
+│   │   ├── Perfil/
+│   │   └── Admin/
+│   │
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+│
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+---
+
+## 🎨 Interface
+
+A interface do IdeiaLab MD foi desenvolvida com base no protótipo criado no Figma, buscando manter uma identidade visual consistente entre as telas da aplicação.
+
+As telas planejadas incluem:
+
+* Login
+* Cadastro
+* Listagem de ideias
+* Detalhamento de uma ideia
+* Nova ideia
+* Perfil
+* Administração
+
+---
+
+## ▶️ Como executar
+
+### 1. Instalar as dependências
+
+Dentro da pasta `frontend`, execute:
+
+```bash
+npm install
+```
+
+### 2. Iniciar o servidor de desenvolvimento
+
+```bash
+npm run dev
+```
+
+Após iniciar, o Vite disponibilizará a aplicação em um endereço semelhante a:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## 🔗 Arquitetura do projeto
+
+O frontend será responsável pela interface e interação com o usuário.
+
+A arquitetura planejada é:
+
+```text
+React + Vite
+      │
+      │ HTTP / API
+      ▼
+Backend Node.js + Express
+      │
+      ▼
+PostgreSQL
+```
+
+O frontend não terá acesso direto ao banco de dados. A comunicação será realizada através da API disponibilizada pelo backend.
+
+---
+
+## 🧩 Desenvolvimento
+
+O projeto está sendo desenvolvido de forma modular, separando cada tela e seus respectivos estilos.
+
+Exemplo:
+
+```text
+pages/
+└── Login/
+    ├── Login.jsx
+    └── Login.css
+```
+
+Essa organização facilita a manutenção e a evolução da aplicação.
+
+---
+
+## 📌 Status
+
+### Login
+
+* [x] Estrutura da tela
+* [x] Painel de apresentação
+* [x] Logo
+* [x] Campos de e-mail e senha
+* [x] Recuperação de senha
+* [x] Botão de login
+* [x] Divisor
+* [x] Link de cadastro
+* [x] Estilização baseada no Figma
+
+### Próximas telas
+
+* [ ] Cadastro
+* [ ] Listagem de ideias
+* [ ] Detalhamento de ideia
+* [ ] Nova ideia
+* [ ] Perfil
+* [ ] Administração
+
+---
+
+## 👥 Projeto
+
+**IdeiaLab MD**
+
+Projeto relacionado ao **Meninas Digitais**, desenvolvido como uma plataforma para organização e gerenciamento de ideias.
+
+---
+
+## 📄 Licença
+
+Projeto acadêmico.
