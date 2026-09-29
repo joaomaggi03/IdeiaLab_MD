@@ -1,0 +1,400 @@
+/* =====================================================
+   LOGIN PAGE
+   Estrutura geral da tela de login
+   ===================================================== */
+
+.login-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+/* =====================================================
+   PAINEL ESQUERDO
+   Identidade visual do IdeiaLab MD
+   ===================================================== */
+
+.login-brand-panel {
+  width: 520px;
+  height: 860px;
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  background: linear-gradient(
+    146deg,
+    #5f2a86 0%,
+    #b5258f 52%,
+    #ee8a1e 100%
+  );
+}
+
+/* =====================================================
+   CABEÇALHO
+   Logo + nome da aplicação
+   ===================================================== */
+
+.login-brand-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ---------- Logo ---------- */
+
+.login-brand-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9);
+}
+
+/* ---------- Nome da aplicação ---------- */
+
+.login-brand-name {
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+   Título + descrição + benefícios
+   ===================================================== */
+
+.login-brand-content {
+  width: 408px;
+}
+
+/* ---------- Título ---------- */
+
+.login-brand-title {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 46px;
+}
+
+/* ---------- Descrição ---------- */
+
+.login-brand-description {
+  margin: 20px 0 0;
+  color: #f7e4f1;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 27.2px;
+}
+
+/* =====================================================
+   BENEFÍCIOS
+   Lista de funcionalidades destacadas
+   ===================================================== */
+
+.login-brand-benefits {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ---------- Cada benefício ---------- */
+
+.login-benefit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* ---------- Número do benefício ---------- */
+
+.login-benefit-number {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* =====================================================
+   RODAPÉ
+   Informações institucionais
+   ===================================================== */
+
+.login-brand-footer {
+  color: #f3d6ec;
+
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19.5px;
+}
+
+/* =====================================================
+   PAINEL DIREITO
+   Area destinada ao login
+   ===================================================== */
+.login-form-panel{
+    flex: 1;
+    height: 860px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+/* =====================================================
+   CONTAINER DO FORMULÁRIO
+   Agrupa todos os elementos da tela de login
+   ===================================================== */
+
+.login-form-container {
+  display: flex;
+  width: 400px;
+  max-width: 400px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+}
+
+/* =====================================================
+   CABEÇALHO DO FORMULÁRIO
+   Título da área de autenticação
+   ===================================================== */
+
+.login-form-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+/* ---------- Título ---------- */
+
+.login-form-title {
+  margin: 0;
+  color: #2a1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* ---------- Descrição ---------- */
+
+.login-form-subtitle {
+  margin: 0;
+  color: #7c5a73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   CAMPOS DO FORMULÁRIO
+   Estrutura padrão dos campos de entrada
+   ===================================================== */
+
+.login-form-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* ---------- Label ---------- */
+
+.login-form-label {
+  color: #2a1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* ---------- Campo de entrada ---------- */
+
+.login-form-input {
+  width: 100%;
+  height: 48px;
+  padding: 14px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid #f0dcea;
+  background: #ffffff;
+  color: #757575;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  outline: none;
+}
+
+/* =====================================================
+   GRUPO DE SENHA
+   Campo de senha + link de recuperação
+   ===================================================== */
+
+.login-password-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+/* =====================================================
+   WRAPPER DA RECUPERAÇÃO DE SENHA
+   Mantém o link alinhado à direita
+   ===================================================== */
+
+.login-forgot-password-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* =====================================================
+   RECUPERAÇÃO DE SENHA
+   Link para recuperar a senha
+   ===================================================== */
+.login-forgot-password-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.login-forgot-password {
+  color: #a81b7d;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+}
+
+
+/* ---------- Estado hover ---------- */
+
+.login-forgot-password:hover {
+  color: #c01b84;
+}
+
+/* =====================================================
+   BOTÃO DE LOGIN
+   Botão principal para acessar a conta
+   ===================================================== */
+
+.login-submit-button {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: #c01b84;
+  color: #ffffff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =====================================================
+   DIVISOR
+   Linha que separa o login do cadastro
+   ===================================================== */
+
+.login-divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ---------- Linhas laterais ---------- */
+
+.login-divider-line {
+  flex: 1;
+  height: 1px;
+  background: #f0dcea;
+}
+
+/* ---------- Texto "ou" ---------- */
+
+.login-divider-text {
+  color: #9a7e94;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* =====================================================
+   CADASTRO
+   Texto e link para criação de conta
+   ===================================================== */
+
+.login-signup {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* ---------- Texto ---------- */
+
+.login-signup-text {
+  color: #7c5a73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* ---------- Link ---------- */
+
+.login-signup-link {
+  color: #a81b7d;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+}
+
+/* ---------- Estado hover ---------- */
+
+.login-signup-link:hover {
+  color: #c01b84;
+}
