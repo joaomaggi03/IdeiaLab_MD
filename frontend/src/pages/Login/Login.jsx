@@ -190,7 +190,7 @@ function Login() {
             ================================================= */}
           <div className='login-signup'>
             <span className='login-signup-text'>Não tem uma conta?</span>
-            <a className='login-signup-link' href='#'>Cadastre-se</a>
+            <a className='login-signup-link' href='/cadastro'>Cadastre-se</a>
           </div>
           
 
