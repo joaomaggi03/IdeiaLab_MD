@@ -1,0 +1,554 @@
+/* ============================================
+   PÁGINA DE LISTAGEM
+============================================ */
+
+.listagem-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #EFE1EC;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+}
+
+
+/* ============================================
+   HEADER
+============================================ */
+
+.listagem-header {
+  width: 100%;
+  height: 68px;
+  padding: 0 32px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #F0DCEA;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ============================================
+   LOGO + NOME
+============================================ */
+
+.listagem-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.listagem-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 17px;
+  object-fit: cover;
+}
+
+.listagem-brand-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #2A1230;
+}
+
+.listagem-brand-md {
+  color: #C01B84;
+}
+
+/* ============================================
+   NAVEGAÇÃO
+============================================ */
+
+.listagem-navigation {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 16px;
+}
+
+.listagem-nav-link {
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #7C5A73;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.listagem-nav-link.active {
+  background: #FBE3F1;
+  color: #A81B7D;
+  font-weight: 600;
+}
+
+/* ============================================
+   USUÁRIO
+============================================ */
+
+.listagem-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.listagem-user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #D6218F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.listagem-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.listagem-user-name {
+  color: #2A1230;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15.6px;
+}
+
+.listagem-user-role {
+  color: #7C5A73;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13.2px;
+}
+
+/* ============================================
+   CONTEÚDO
+============================================ */
+
+.listagem-content {
+  padding: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.listagem-content h1 {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: #2A1230;
+}
+
+.listagem-content p {
+  margin: 4px 0 0;
+  color: #7C5A73;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ============================================
+   CABEÇALHO DA PÁGINA
+============================================ */
+
+.listagem-page-header {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+
+/* ============================================
+   TÍTULO DA PÁGINA
+============================================ */
+
+.listagem-page-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.listagem-page-title h1 {
+  margin: 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.listagem-page-title p {
+  margin: 0;
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ============================================
+   BOTÃO — NOVA IDEIA
+============================================ */
+
+.listagem-new-idea-button {
+  height: 44px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: #C01B84;
+  color: #FFFFFF;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.listagem-new-idea-button:hover {
+  background: #A81B7D;
+}
+
+/* ============================================
+   BARRA DE BUSCA E FILTROS
+============================================ */
+
+.listagem-filters {
+  width: 100%;
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+/* ============================================
+   CAMPO DE BUSCA
+============================================ */
+
+.listagem-search {
+  flex: 1;
+  height: 40px;
+  padding: 0 14px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+}
+
+.listagem-search input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.listagem-search input::placeholder {
+  color: #757575;
+}
+
+
+/* ============================================
+   FILTROS DE CATEGORIA
+============================================ */
+
+.listagem-category-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.listagem-filter-button {
+  padding: 9px 14px;
+  border: 1px solid #F0DCEA;
+  border-radius: 9px;
+  background: #FFFFFF;
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.listagem-filter-button.active {
+  border-color: #FBE3F1;
+  background: #FBE3F1;
+  color: #A81B7D;
+  font-weight: 600;
+}
+
+
+/* ============================================
+   DIVISOR
+============================================ */
+
+.listagem-filter-divider {
+  width: 1px;
+  height: 28px;
+  background: #F0DCEA;
+}
+
+
+/* ============================================
+   ORDENAÇÃO
+============================================ */
+
+.listagem-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.listagem-sort-label {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.listagem-sort-button {
+  padding: 9px 14px;
+
+  border: 1px solid #F0DCEA;
+  border-radius: 9px;
+  background: #FFFFFF;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ============================================
+   ÁREA PRINCIPAL
+============================================ */
+
+.listagem-main-area {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* ============================================
+   LISTA DE IDEIAS
+============================================ */
+
+.listagem-ideas-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ============================================
+   CARD DA IDEIA
+============================================ */
+
+.listagem-idea-card {
+  width: 100%;
+  padding: 22px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+/* ============================================
+   ÁREA DE VOTAÇÃO
+============================================ */
+
+.listagem-vote-box {
+  min-width: 64px;
+  padding: 10px 16px;
+  background: #FDF2F8;
+  border: 1px solid #F0DCEA;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.listagem-vote-arrow {
+  color: #C01B84;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.listagem-vote-number {
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.listagem-vote-label {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* ============================================
+   CONTEÚDO DO CARD
+============================================ */
+
+.listagem-idea-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ============================================
+   TAGS
+============================================ */
+
+.listagem-idea-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.listagem-category-tag,
+.listagem-status-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+}
+
+.listagem-category-tag {
+  border: 1px solid #F0DCEA;
+  color: #7C5A73;
+  font-weight: 500;
+}
+
+.listagem-status-tag {
+  border: none;
+  font-weight: 600;
+}
+
+/* Status: Aprovada */
+
+.status-aprovada {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+/* Status: Em análise */
+
+.status-em-análise {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+/* Status: Em execução */
+
+.status-em-execução {
+  background: #EDE4FA;
+  color: #7A2A8F;
+}
+
+/* ============================================
+   TÍTULO
+============================================ */
+
+.listagem-idea-title {
+  margin: 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ============================================
+   DESCRIÇÃO
+============================================ */
+
+.listagem-idea-description {
+  margin: 0;
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+/* ============================================
+   RODAPÉ DO CARD
+============================================ */
+
+.listagem-idea-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 2px;
+}
+
+.listagem-idea-author {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.listagem-idea-author strong {
+  color: #2A1230;
+  font-weight: 600;
+}
+
+.listagem-idea-comments {
+  margin-left: auto;
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* ============================================
+   SIDEBAR
+============================================ */
+
+.listagem-sidebar {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listagem-sidebar-card {
+  width: 100%;
+  padding: 22px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 14px;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
