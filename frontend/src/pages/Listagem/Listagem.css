@@ -483,6 +483,8 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 18px;
   font-weight: 600;
+  text-decoration: none;
+  display: block;
 }
 
 /* ============================================
@@ -551,4 +553,207 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
   font-weight: 600;
+}
+
+/* ============================================
+   SIDEBAR — CABEÇALHO DOS CARDS
+============================================ */
+
+.listagem-sidebar-card {
+  width: 100%;
+  padding: 22px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 14px;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ============================================
+   RANKING — CABEÇALHO
+============================================ */
+
+.listagem-sidebar-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.listagem-sidebar-header h3 {
+  margin: 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.listagem-sidebar-header span {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ============================================
+   RANKING — LISTA
+============================================ */
+
+.listagem-ranking-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ============================================
+   RANKING — ITEM
+============================================ */
+
+.listagem-ranking-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============================================
+   RANKING — POSIÇÃO
+============================================ */
+
+.listagem-ranking-position {
+  min-width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #FBE3F1;
+  color: #A81B7D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Primeiro colocado */
+
+.listagem-ranking-position.destaque {
+  background: #C01B84;
+  color: #FFFFFF;
+}
+
+/* Segundo colocado */
+
+.listagem-ranking-position.destaque-2 {
+  background: #A32E96;
+  color: #FFFFFF;
+}
+
+/* Terceiro colocado */
+
+.listagem-ranking-position.destaque-3 {
+  background: #C761B0;
+  color: #FFFFFF;
+}
+
+/* ============================================
+   RANKING — TÍTULO
+============================================ */
+
+.listagem-ranking-title {
+  flex: 1;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+/* ============================================
+   RANKING — VOTOS
+============================================ */
+
+.listagem-ranking-votes {
+  color: #C01B84;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ============================================
+   STATUS — CABEÇALHO
+============================================ */
+
+.listagem-status-header {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.listagem-status-header h3 {
+  margin: 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ============================================
+   STATUS — LISTA
+============================================ */
+
+.listagem-status-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ============================================
+   STATUS — ITEM
+============================================ */
+
+.listagem-status-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Texto do status */
+
+.listagem-status-item span {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Quantidade */
+
+.listagem-status-item strong {
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ============================================
+   CORES DOS STATUS
+============================================ */
+
+.status-analysis {
+  color: #92400E;
+}
+
+.status-approved {
+  color: #15803D;
+}
+
+.status-running {
+  color: #7A2A8F;
+}
+
+.status-completed {
+  color: #B01B80;
 }

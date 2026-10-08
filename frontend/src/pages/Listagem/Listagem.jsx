@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Listagem.css'
 
 import logoIdeiaLab from '../../assets/logo-ideialab.png'
@@ -100,26 +101,26 @@ function Listagem() {
 
         <nav className="listagem-navigation">
 
-          <a
-            href="#"
+          <Link
+            to="/listagem"
             className="listagem-nav-link active"
           >
             Ideias
-          </a>
+          </Link>
 
-          <a
-            href="#"
+          <Link
+            to="/nova-ideia"
             className="listagem-nav-link"
           >
             Nova ideia
-          </a>
+          </Link>
 
-          <a
-            href="#"
+          <Link
+            to="/admin"
             className="listagem-nav-link"
           >
             Admin
-          </a>
+          </Link>
 
         </nav>
 
@@ -335,10 +336,7 @@ function Listagem() {
 
                   {/* Título */}
 
-                  <h2 className="listagem-idea-title">
-                    {ideia.titulo}
-                  </h2>
-
+                  <Link to='/detalhe' className='listagem-idea-title'>{ideia.titulo}</Link>
 
                   {/* Descrição */}
 
@@ -392,14 +390,71 @@ function Listagem() {
             {/* Ranking */}
 
             <div className="listagem-sidebar-card">
-              Ranking
+              <div className='listagem-sidebar-header'>
+                  <h3>
+                    🏆 Ranking
+                  </h3>
+                  <span>Mais votadas</span>
+              </div>
+
+              <div className='listagem-ranking-list'>
+                  <div className='listagem-ranking-item'>
+                    <span className='listagem-ranking-position destaque'>1</span>
+                    <span className='listagem-ranking-title'>Oficina de introdução ao Scratch</span>
+                    <span className='listagem-ranking-votes'>42</span>
+                  </div>
+
+                  <div className='listagem-ranking-item'>
+                    <span className='listagem-ranking-position destaque-2'>2</span>
+                    <span className='listagem-ranking-title'>Mulheres pioneiras na Computação</span>
+                    <span className='listagem-ranking-votes'>37</span>  
+                  </div>
+
+                  <div className='listagem-ranking-item'>
+                    <span className='listagem-ranking-position destaque-3'>3</span>
+                    <span className='listagem-ranking-title'>Construindo um site em grupo</span>
+                    <span className='listagem-ranking-votes'>29</span>  
+                  </div>
+
+                  <div className='listagem-ranking-item'>
+                    <span className='listagem-ranking-position destaque-4'>4</span>
+                    <span className='listagem-ranking-title'>Kit materiais de lógica</span>
+                    <span className='listagem-ranking-votes'>21</span>  
+                  </div>
+              </div>
             </div>
 
 
             {/* Status */}
 
             <div className="listagem-sidebar-card">
-              Status das ideias
+              <div className='listagem-status-header'>
+                <h3>
+                  Status das ideias
+                </h3>
+              </div>
+
+              <div className='listagem-status-list'>
+                <div className='listagem-status-item'>
+                  <span className='status-analysis'>● Em análise</span>
+                  <strong>9</strong>
+                </div>
+
+                <div className='listagem-status-item'>
+                  <span className='status-approved'>● Aprovada</span>
+                  <strong>12</strong>
+                </div>
+
+                <div className='listagem-status-item'>
+                  <span className='status-running'>● Em execução</span>
+                  <strong>4</strong>
+                </div>
+
+                <div className='listagem-status-item'>
+                  <span className='status-completed'>● Concluída</span>
+                  <strong>3</strong>
+                </div>
+              </div>
             </div>
 
           </aside>

@@ -1,0 +1,745 @@
+/* =====================================================
+   TELA DE DETALHE DA IDEIA
+   ===================================================== */
+
+/* =====================================================
+   CONTAINER PRINCIPAL
+   ===================================================== */
+
+.detalhe-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #EFE1EC;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.detalhe-header {
+  width: 100%;
+  height: 68px;
+  padding: 0 32px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #F0DCEA;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* -----------------------------------------------------
+   Logo + nome do projeto
+   ----------------------------------------------------- */
+
+.detalhe-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detalhe-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 17px;
+  object-fit: cover;
+}
+
+.detalhe-brand-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #2A1230;
+}
+
+.detalhe-brand-md {
+  color: #C01B84;
+}
+
+/* -----------------------------------------------------
+   Navegação
+   ----------------------------------------------------- */
+
+.detalhe-navigation {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 16px;
+}
+
+.detalhe-nav-link {
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.detalhe-nav-link.active {
+  background: #FBE3F1;
+  color: #A81B7D;
+  font-weight: 600;
+}
+
+.detalhe-nav-link:hover {
+  color: #A81B7D;
+}
+
+/* -----------------------------------------------------
+   Usuário logado
+   ----------------------------------------------------- */
+
+.detalhe-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detalhe-user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #D6218F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.detalhe-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.detalhe-user-name {
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15.6px;
+}
+
+.detalhe-user-role {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13.2px;
+}
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+   ===================================================== */
+
+.detalhe-content {
+  width: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* -----------------------------------------------------
+   Link voltar
+   ----------------------------------------------------- */
+
+.detalhe-back-link {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.detalhe-back-link:hover {
+  color: #A81B7D;
+}
+
+/* =====================================================
+   ÁREA PRINCIPAL
+   ===================================================== */
+
+.detalhe-main-area {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* -----------------------------------------------------
+   Coluna esquerda
+   ----------------------------------------------------- */
+
+.detalhe-left-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =====================================================
+   CARD PRINCIPAL DA IDEIA
+   ===================================================== */
+
+.detalhe-idea-card {
+  width: 100%;
+  padding: 30px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* -----------------------------------------------------
+   Tags da ideia
+   ----------------------------------------------------- */
+
+.detalhe-idea-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detalhe-category-tag,
+.detalhe-status-tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.detalhe-category-tag {
+  border: 1px solid #F0DCEA;
+  color: #7C5A73;
+  font-weight: 500;
+}
+
+.detalhe-status-tag {
+  background: #DCFCE7;
+  color: #15803D;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------
+   Título
+   ----------------------------------------------------- */
+
+.detalhe-idea-title {
+  margin: 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+/* -----------------------------------------------------
+   Autor
+   ----------------------------------------------------- */
+
+.detalhe-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detalhe-author-avatar {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #D6218F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.detalhe-author-text {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.detalhe-author-text strong {
+  color: #2A1230;
+  font-weight: 700;
+}
+
+/* -----------------------------------------------------
+   Descrição
+   ----------------------------------------------------- */
+
+.detalhe-idea-description {
+  margin: 0;
+  color: #3A3450;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27.2px;
+}
+
+/* -----------------------------------------------------
+   Informações resumidas
+   ----------------------------------------------------- */
+
+.detalhe-idea-meta {
+  padding-top: 8px;
+  border-top: 1px solid #F6E7F1;
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.detalhe-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detalhe-meta-label {
+  color: #9A7E94;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.detalhe-meta-item strong {
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   CARD DE COMENTÁRIOS
+   ===================================================== */
+
+.detalhe-comments-card {
+  width: 100%;
+  padding: 30px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* -----------------------------------------------------
+   Título dos comentários
+   ----------------------------------------------------- */
+
+.detalhe-comments-title {
+  margin: 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.detalhe-comments-title span {
+  color: #9A7E94;
+  font-weight: 500;
+}
+
+/* -----------------------------------------------------
+   Formulário de comentário
+   ----------------------------------------------------- */
+
+.detalhe-comment-form {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.detalhe-comment-avatar {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #D6218F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------
+   Área do textarea + botão
+   ----------------------------------------------------- */
+
+.detalhe-comment-form-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detalhe-comment-form textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 12px 14px;
+  border: 1px solid #F0DCEA;
+  border-radius: 10px;
+  resize: vertical;
+  outline: none;
+  background: #FFFFFF;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.detalhe-comment-form textarea::placeholder {
+  color: #757575;
+}
+
+.detalhe-comment-form textarea:focus {
+  border-color: #C01B84;
+}
+
+/* -----------------------------------------------------
+   Botão comentar
+   ----------------------------------------------------- */
+
+.detalhe-comment-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.detalhe-comment-button {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 9px;
+  background: #C01B84;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.detalhe-comment-button:hover {
+  background: #A81B7D;
+}
+
+/* -----------------------------------------------------
+   Divisor
+   ----------------------------------------------------- */
+
+.detalhe-comment-divider {
+  width: 100%;
+  height: 1px;
+  background: #F6E7F1;
+}
+
+/* =====================================================
+   LISTA DE COMENTÁRIOS
+   ===================================================== */
+
+.detalhe-comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.detalhe-comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* -----------------------------------------------------
+   Cores dos avatares
+   ----------------------------------------------------- */
+
+.detalhe-comment-avatar.roxo {
+  background: #7A2A8F;
+}
+
+.detalhe-comment-avatar.rosa {
+  background: #C01B84;
+}
+
+.detalhe-comment-avatar.rosa-claro {
+  background: #D6218F;
+}
+
+/* -----------------------------------------------------
+   Conteúdo do comentário
+   ----------------------------------------------------- */
+
+.detalhe-comment-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detalhe-comment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detalhe-comment-header strong {
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.detalhe-comment-header span {
+  color: #9A7E94;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.detalhe-comment-content p {
+  margin: 0;
+  color: #3A3450;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22.4px;
+}
+
+/* =====================================================
+   SIDEBAR
+   ===================================================== */
+
+.detalhe-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =====================================================
+   CARD DE VOTAÇÃO
+   ===================================================== */
+
+.detalhe-vote-card {
+  width: 100%;
+  padding: 26px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* -----------------------------------------------------
+   Textos da votação
+   ----------------------------------------------------- */
+
+.detalhe-vote-label {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.detalhe-vote-number {
+  color: #C01B84;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.detalhe-vote-info {
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* -----------------------------------------------------
+   Botão votar
+   ----------------------------------------------------- */
+
+.detalhe-vote-button {
+  width: 100%;
+  height: 48px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 10px;
+  background: #C01B84;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 14.8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.detalhe-vote-button:hover {
+  background: #A81B7D;
+}
+
+/* -----------------------------------------------------
+   Observação da votação
+   ----------------------------------------------------- */
+
+.detalhe-vote-note {
+  color: #9A7E94;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* =====================================================
+   CARD DE INFORMAÇÕES
+   ===================================================== */
+
+.detalhe-info-card {
+  width: 100%;
+  padding: 24px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* -----------------------------------------------------
+   Título
+   ----------------------------------------------------- */
+
+.detalhe-info-card h2 {
+  margin: 0 0 2px;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------
+   Linhas de informação
+   ----------------------------------------------------- */
+
+.detalhe-info-row {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.detalhe-info-row span {
+  color: #9A7E94;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.detalhe-info-row strong {
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.detalhe-info-row .detalhe-info-status {
+  color: #15803D;
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+   ===================================================== */
+
+@media (max-width: 900px) {
+  .detalhe-header {
+    padding: 0 20px;
+  }
+
+  .detalhe-content {
+    padding: 24px 20px;
+  }
+
+  .detalhe-main-area {
+    flex-direction: column;
+  }
+
+  .detalhe-sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .detalhe-header {
+    height: auto;
+    min-height: 68px;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+
+  .detalhe-navigation {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .detalhe-user {
+    margin-left: auto;
+  }
+
+  .detalhe-content {
+    padding: 20px 16px;
+  }
+
+  .detalhe-idea-card,
+  .detalhe-comments-card {
+    padding: 20px;
+  }
+
+  .detalhe-idea-title {
+    font-size: 25px;
+    line-height: 31px;
+  }
+
+  .detalhe-idea-meta {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .detalhe-comment-form {
+    align-items: flex-start;
+  }
+
+  .detalhe-comment-button {
+    width: 100%;
+  }
+
+  .detalhe-comment-button-wrapper {
+    width: 100%;
+  }
+}
