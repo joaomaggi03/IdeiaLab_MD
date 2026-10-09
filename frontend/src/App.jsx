@@ -5,6 +5,8 @@ import Cadastro from './pages/Cadastro/Cadastro'
 import Listagem from './pages/Listagem/Listagem'
 import Detalhe from './pages/Detalhe/Detalhe'
 import NovaIdeia from './pages/NovaIdeia/NovaIdeia'
+import Perfil from './pages/Perfil/Perfil'
+import Admin from './pages/Admin/Admin'
 
 function App() {
   return (
@@ -19,8 +21,12 @@ function App() {
       <Route path='/listagem' element={<Listagem />}/>
       {/*Tela de detalhe*/}
       <Route path='/detalhe' element={<Detalhe />}/>
-       {/*Tela de Nova Ideia*/}
+      {/*Tela de Nova Ideia*/}
       <Route path='/nova-ideia' element={<NovaIdeia />}/>
+      {/*Tela de Perfil*/}
+      <Route path='/perfil' element={<Perfil />}/>
+      {/*Tela de Admin*/}
+      <Route path='/admin' element={<Admin />}/>
     </Routes>
   )
 }

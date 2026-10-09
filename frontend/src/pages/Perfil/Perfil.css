@@ -1,0 +1,464 @@
+/* =====================================================
+   PÁGINA DE PERFIL
+===================================================== */
+
+.perfil-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #FCF4F9;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+}
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.perfil-header {
+  width: 100%;
+  height: 68px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #F0DCEA;
+}
+
+.perfil-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.perfil-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.perfil-brand-name {
+  display: flex;
+  align-items: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.perfil-brand-name span:first-child {
+  color: #2A1230;
+}
+
+.perfil-brand-md {
+  color: #C01B84;
+}
+
+.perfil-navigation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 16px;
+}
+
+.perfil-nav-link {
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #7C5A73;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.perfil-nav-link:hover {
+  background: #FBE3F1;
+  color: #A81B7D;
+}
+
+.perfil-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.perfil-user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #D6218F;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.perfil-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.perfil-user-name {
+  color: #2A1230;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15.6px;
+}
+
+.perfil-user-role {
+  color: #7C5A73;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13.2px;
+}
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
+
+.perfil-content {
+  width: 100%;
+  min-height: 832px;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.perfil-container {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Título e descrição */
+
+.perfil-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.perfil-heading h1 {
+  margin: 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.perfil-heading p {
+  margin: 0;
+  color: #7C5A73;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* =====================================================
+   CARTÃO DO FORMULÁRIO
+===================================================== */
+
+.perfil-form {
+  width: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 16px;
+}
+
+/* =====================================================
+   FOTO DO PERFIL
+===================================================== */
+
+.perfil-photo-section {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.perfil-large-avatar {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #D6218F;
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.perfil-photo-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.perfil-photo-name {
+  color: #2A1230;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.perfil-change-photo {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #C01B84;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* Divisores */
+
+.perfil-divider {
+  width: 100%;
+  height: 1px;
+  flex-shrink: 0;
+  background: #F6E7F1;
+}
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+.perfil-fields-row {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.perfil-field {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.perfil-field label {
+  color: #2A1230;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.perfil-field input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid #F0DCEA;
+  border-radius: 10px;
+  outline: none;
+  background: #FFFFFF;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.perfil-field input:focus {
+  border-color: #C01B84;
+  box-shadow: 0 0 0 3px rgba(192, 27, 132, 0.1);
+}
+
+.perfil-field input::placeholder {
+  color: #757575;
+}
+
+/* =====================================================
+   PERFIL DE ACESSO
+===================================================== */
+
+.perfil-access-box {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #F0DCEA;
+  border-radius: 10px;
+  background: #FCF4F9;
+}
+
+.perfil-access-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #FBE3F1;
+  color: #A81B7D;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.perfil-access-description {
+  color: #7C5A73;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* =====================================================
+   ALTERAÇÃO DE SENHA
+===================================================== */
+
+.perfil-password-title {
+  margin: -2px 0 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.perfil-form-actions {
+  width: 100%;
+  padding-top: 6px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.perfil-cancel-button,
+.perfil-save-button {
+  height: 46px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.perfil-cancel-button {
+  border: 1px solid #F0DCEA;
+  background: #FFFFFF;
+  color: #7C5A73;
+}
+
+.perfil-cancel-button:hover {
+  background: #FCF4F9;
+}
+
+.perfil-save-button {
+  border: 1px solid #C01B84;
+  background: #C01B84;
+  color: #FFFFFF;
+}
+
+.perfil-save-button:hover {
+  background: #A81B7D;
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 760px) {
+  .perfil-header {
+    height: auto;
+    min-height: 68px;
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .perfil-navigation {
+    order: 3;
+    width: 100%;
+    padding-left: 0;
+    flex-wrap: wrap;
+  }
+
+  .perfil-user {
+    margin-left: auto;
+  }
+
+  .perfil-content {
+    min-height: auto;
+    padding: 24px 20px;
+  }
+
+  .perfil-form {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .perfil-fields-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .perfil-field {
+    width: 100%;
+  }
+
+  .perfil-access-box {
+    flex-wrap: wrap;
+    padding: 10px 14px;
+  }
+
+  .perfil-access-description {
+    font-size: 12px;
+  }
+
+  .perfil-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .perfil-cancel-button,
+  .perfil-save-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .perfil-header {
+    padding: 12px;
+  }
+
+  .perfil-user {
+    gap: 8px;
+  }
+
+  .perfil-user-name {
+    font-size: 12px;
+  }
+
+  .perfil-form {
+    padding: 18px;
+  }
+
+  .perfil-content {
+    padding: 20px 12px;
+  }
+}
