@@ -179,12 +179,7 @@ function Listagem() {
 
 
           {/* Botão Nova ideia */}
-          <button
-            type="button"
-            className="listagem-new-idea-button"
-          >
-            + Nova ideia
-          </button>
+          <Link to='/nova-ideia' className='listagem=new-idea-button'>Nova ideia</Link>
 
         </div>
 

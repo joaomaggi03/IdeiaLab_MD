@@ -1,0 +1,476 @@
+/* =====================================================
+   TELA NOVA IDEIA
+   ===================================================== */
+
+.nova-ideia-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #FCF4F9;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.nova-ideia-header {
+  width: 100%;
+  height: 68px;
+  padding: 0 32px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #F0DCEA;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* -----------------------------------------------------
+   Logo e nome
+   ----------------------------------------------------- */
+
+.nova-ideia-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nova-ideia-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nova-ideia-brand-name {
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nova-ideia-brand-md {
+  color: #C01B84;
+}
+
+/* -----------------------------------------------------
+   Navegação
+   ----------------------------------------------------- */
+
+.nova-ideia-navigation {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nova-ideia-nav-link {
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #7C5A73;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nova-ideia-nav-link.active {
+  background: #FBE3F1;
+  color: #A81B7D;
+  font-weight: 600;
+}
+
+.nova-ideia-nav-link:hover {
+  color: #A81B7D;
+}
+
+/* -----------------------------------------------------
+   Usuário
+   ----------------------------------------------------- */
+
+.nova-ideia-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nova-ideia-user-avatar {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #D6218F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nova-ideia-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.nova-ideia-user-name {
+  color: #2A1230;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15.6px;
+}
+
+.nova-ideia-user-role {
+  color: #7C5A73;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13.2px;
+}
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+   ===================================================== */
+
+.nova-ideia-content {
+  width: 100%;
+  min-height: 872px;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* -----------------------------------------------------
+   Container central do formulário
+   ----------------------------------------------------- */
+
+.nova-ideia-container {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 22px;
+}
+
+/* -----------------------------------------------------
+   Link para voltar
+   ----------------------------------------------------- */
+
+.nova-ideia-back-link {
+  padding-bottom: 3px;
+  color: #7C5A73;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.nova-ideia-back-link:hover {
+  color: #A81B7D;
+}
+
+/* =====================================================
+   TÍTULO DA PÁGINA
+   ===================================================== */
+
+.nova-ideia-page-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.nova-ideia-page-heading h1 {
+  margin: 0;
+  color: #2A1230;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.nova-ideia-page-heading p {
+  margin: 0;
+  color: #7C5A73;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   CARD DO FORMULÁRIO
+   ===================================================== */
+
+.nova-ideia-form {
+  width: 100%;
+  padding: 32px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* =====================================================
+   CAMPOS DO FORMULÁRIO
+   ===================================================== */
+
+.nova-ideia-field {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+/* -----------------------------------------------------
+   Labels
+   ----------------------------------------------------- */
+
+.nova-ideia-field label {
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------
+   Inputs e seleção
+   ----------------------------------------------------- */
+
+.nova-ideia-field input,
+.nova-ideia-field select {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 10px;
+  outline: none;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.nova-ideia-field input::placeholder,
+.nova-ideia-field textarea::placeholder {
+  color: #757575;
+  opacity: 1;
+}
+
+.nova-ideia-field input:focus,
+.nova-ideia-field select:focus,
+.nova-ideia-field textarea:focus {
+  border-color: #C01B84;
+}
+
+/* -----------------------------------------------------
+   Textarea de descrição
+   ----------------------------------------------------- */
+
+.nova-ideia-field textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 12px 14px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 10px;
+  outline: none;
+  resize: vertical;
+  color: #2A1230;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   CATEGORIA E PÚBLICO-ALVO
+   ===================================================== */
+
+.nova-ideia-fields-row {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.nova-ideia-fields-row .nova-ideia-field:first-child {
+  flex: 286.5;
+}
+
+.nova-ideia-fields-row .nova-ideia-field:last-child {
+  flex: 387.5;
+}
+
+.nova-ideia-field select {
+  cursor: pointer;
+}
+
+/* =====================================================
+   AVISO DE STATUS INICIAL
+   ===================================================== */
+
+.nova-ideia-status-notice {
+  width: 100%;
+  padding: 12px 16px;
+  background: #FDF2F8;
+  border: 1px solid #F0DCEA;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* -----------------------------------------------------
+   Etiqueta Em análise
+   ----------------------------------------------------- */
+
+.nova-ideia-status-badge {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  background: #FEF3C7;
+  border-radius: 20px;
+  color: #92400E;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* -----------------------------------------------------
+   Texto do aviso
+   ----------------------------------------------------- */
+
+.nova-ideia-status-notice p {
+  margin: 0;
+  color: #7C5A73;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   BOTÕES
+   ===================================================== */
+
+.nova-ideia-form-actions {
+  width: 100%;
+  padding-top: 6px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* -----------------------------------------------------
+   Botão cancelar
+   ----------------------------------------------------- */
+
+.nova-ideia-cancel-button {
+  height: 46px;
+  padding: 0 22px;
+  background: #FFFFFF;
+  border: 1px solid #F0DCEA;
+  border-radius: 10px;
+  color: #7C5A73;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nova-ideia-cancel-button:hover {
+  background: #FDF2F8;
+}
+
+/* -----------------------------------------------------
+   Botão cadastrar
+   ----------------------------------------------------- */
+
+.nova-ideia-submit-button {
+  height: 46px;
+  padding: 0 24px;
+  background: #C01B84;
+  border: none;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nova-ideia-submit-button:hover {
+  background: #A81B7D;
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+   ===================================================== */
+
+@media (max-width: 700px) {
+  .nova-ideia-header {
+    height: auto;
+    min-height: 68px;
+    padding: 14px 20px;
+    flex-wrap: wrap;
+  }
+
+  .nova-ideia-navigation {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .nova-ideia-content {
+    min-height: auto;
+    padding: 24px 20px;
+  }
+
+  .nova-ideia-form {
+    padding: 24px;
+  }
+
+  .nova-ideia-fields-row {
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .nova-ideia-status-notice {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 450px) {
+  .nova-ideia-header {
+    padding: 14px 16px;
+  }
+
+  .nova-ideia-content {
+    padding: 20px 16px;
+  }
+
+  .nova-ideia-form {
+    padding: 20px;
+  }
+
+  .nova-ideia-page-heading h1 {
+    font-size: 25px;
+  }
+
+  .nova-ideia-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .nova-ideia-form-actions button {
+    width: 100%;
+  }
+}

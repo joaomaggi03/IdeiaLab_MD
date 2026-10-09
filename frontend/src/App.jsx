@@ -4,6 +4,7 @@ import Login from './pages/Login/Login'
 import Cadastro from './pages/Cadastro/Cadastro'
 import Listagem from './pages/Listagem/Listagem'
 import Detalhe from './pages/Detalhe/Detalhe'
+import NovaIdeia from './pages/NovaIdeia/NovaIdeia'
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <Route path='/listagem' element={<Listagem />}/>
       {/*Tela de detalhe*/}
       <Route path='/detalhe' element={<Detalhe />}/>
+       {/*Tela de Nova Ideia*/}
+      <Route path='/nova-ideia' element={<NovaIdeia />}/>
     </Routes>
   )
 }
