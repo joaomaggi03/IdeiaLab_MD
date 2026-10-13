@@ -1,5 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 
+import { RotaProtegida } from './services/auth'
+
 import Login from './pages/Login/Login'
 import Cadastro from './pages/Cadastro/Cadastro'
 import Listagem from './pages/Listagem/Listagem'
@@ -18,15 +20,15 @@ function App() {
       {/* Redireciona a página inicial para o Login */}
       <Route path="/" element={<Navigate to="/login" replace />} />
       {/*Tela de listagem*/}
-      <Route path='/listagem' element={<Listagem />}/>
+      <Route path='/listagem' element={<RotaProtegida><Listagem /></RotaProtegida>}/>
       {/*Tela de detalhe*/}
-      <Route path='/detalhe' element={<Detalhe />}/>
+      <Route path='/detalhe/:id' element={<RotaProtegida><Detalhe /></RotaProtegida>}/>
       {/*Tela de Nova Ideia*/}
-      <Route path='/nova-ideia' element={<NovaIdeia />}/>
+      <Route path='/nova-ideia' element={<RotaProtegida><NovaIdeia /></RotaProtegida>}/>
       {/*Tela de Perfil*/}
-      <Route path='/perfil' element={<Perfil />}/>
+      <Route path='/perfil' element={<RotaProtegida><Perfil /></RotaProtegida>}/>
       {/*Tela de Admin*/}
-      <Route path='/admin' element={<Admin />}/>
+      <Route path='/admin' element={<RotaProtegida admin><Admin /></RotaProtegida>}/>
     </Routes>
   )
 }

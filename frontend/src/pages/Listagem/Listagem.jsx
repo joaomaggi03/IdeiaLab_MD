@@ -1,74 +1,25 @@
+import { useEffect, useState } from 'react'
+import { api, getUsuario } from '../../services/api'
 import { Link } from 'react-router-dom'
 import './Listagem.css'
 
 import logoIdeiaLab from '../../assets/logo-ideialab.png'
 
-// =====================================================
-// DADOS FICTÍCIOS
-// =====================================================
-// Estes dados servem apenas para montar e testar a
-// interface.
-//
-// Posteriormente, serão substituídos pelos dados reais
-// recebidos através da API do backend.
-// =====================================================
-
-const ideiasExemplo = [
-  {
-    id: 1,
-    votos: 42,
-    categoria: 'Oficinas',
-    status: 'Aprovada',
-    titulo: 'Oficina de introdução ao Scratch',
-    descricao:
-      'Atividade prática para as participantes criarem seus primeiros jogos com blocos de programação.',
-    autor: 'Marina Alves',
-    data: '12/set',
-    comentarios: 8,
-  },
-
-  {
-    id: 2,
-    votos: 37,
-    categoria: 'Palestras',
-    status: 'Em análise',
-    titulo: 'Mulheres pioneiras na Computação',
-    descricao:
-      'Roda de conversa apresentando trajetórias de mulheres que marcaram a história da tecnologia.',
-    autor: 'Bruna Costa',
-    data: '11/set',
-    comentarios: 5,
-  },
-
-  {
-    id: 3,
-    votos: 29,
-    categoria: 'Dinâmicas',
-    status: 'Em execução',
-    titulo: 'Construindo um site em grupo',
-    descricao:
-      'Dinâmica colaborativa em que as meninas montam uma página simples usando HTML e CSS.',
-    autor: 'Letícia Souza',
-    data: '10/set',
-    comentarios: 3,
-  },
-
-  {
-    id: 4,
-    votos: 21,
-    categoria: 'Materiais',
-    status: 'Em análise',
-    titulo: 'Kit de materiais sobre lógica de programação',
-    descricao:
-      'Conjunto de cartas e desafios impressos para trabalhar lógica sem precisar de computador.',
-    autor: 'Ana Paula Reis',
-    data: '09/set',
-    comentarios: 2,
-  },
-]
-
-
 function Listagem() {
+  const [ideias, setIdeias] = useState([])
+  const [ranking, setRanking] = useState([])
+  const [categorias, setCategorias] = useState([])
+  const [categoria, setCategoria] = useState('')
+  const [busca, setBusca] = useState('')
+  const [erro, setErro] = useState('')
+  const usuario = getUsuario()
+  useEffect(() => {
+    Promise.all([api('/ideias/ranking'), api('/categorias')])
+      .then(([itens, cats]) => { setIdeias(itens);setRanking(itens);setCategorias(cats) })
+      .catch(e => setErro(e.message))
+  }, [])
+  const filtradas = ideias.filter(i => (!categoria || String(i.categoriaId) === categoria) && i.titulo.toLowerCase().includes(busca.toLowerCase()))
+
   return (
     <div className="listagem-page">
 
@@ -132,17 +83,17 @@ function Listagem() {
         <div className="listagem-user">
 
           <div className="listagem-user-avatar">
-            MA
+            {(usuario?.nome || 'U').slice(0,2).toUpperCase()}
           </div>
 
           <div className="listagem-user-info">
 
             <span className="listagem-user-name">
-              Marina Alves
+              {usuario?.nome || "Usuária"}
             </span>
 
             <span className="listagem-user-role">
-              Voluntária
+              {usuario?.perfil === 'admin' ? 'Administração' : 'Voluntária'}
             </span>
 
           </div>
@@ -172,7 +123,7 @@ function Listagem() {
             </h1>
 
             <p>
-              28 ideias cadastradas · 12 aprovadas
+              {ideias.length} ideias cadastradas · {ideias.filter(i => i.status === 'Aprovada').length} aprovadas
             </p>
 
           </div>
@@ -199,6 +150,8 @@ function Listagem() {
               type="text"
               placeholder="Buscar ideias..."
               aria-label="Buscar ideias"
+              value={busca} onChange={e => setBusca(e.target.value)}
+              value={busca} onChange={e => setBusca(e.target.value)}
             />
 
           </div>
@@ -207,35 +160,8 @@ function Listagem() {
           {/* Filtros por categoria */}
 
           <div className="listagem-category-filters">
-
-            <button
-              type="button"
-              className="listagem-filter-button active"
-            >
-              Todas
-            </button>
-
-            <button
-              type="button"
-              className="listagem-filter-button"
-            >
-              Oficinas
-            </button>
-
-            <button
-              type="button"
-              className="listagem-filter-button"
-            >
-              Palestras
-            </button>
-
-            <button
-              type="button"
-              className="listagem-filter-button"
-            >
-              Dinâmicas
-            </button>
-
+            <button type="button" className={`listagem-filter-button ${!categoria ? 'active' : ''}`} onClick={() => setCategoria('')}>Todas</button>
+            {categorias.map(c => <button key={c.id} type="button" className={`listagem-filter-button ${categoria === String(c.id) ? 'active' : ''}`} onClick={() => setCategoria(String(c.id))}>{c.nome}</button>)}
           </div>
 
 
@@ -278,7 +204,8 @@ function Listagem() {
 
           <section className="listagem-ideas-list">
 
-            {ideiasExemplo.map((ideia) => (
+            {erro && <p role="alert" style={{color:'crimson'}}>{erro}</p>}
+            {filtradas.map((ideia) => (
 
               <article
                 className="listagem-idea-card"
@@ -315,7 +242,7 @@ function Listagem() {
                   <div className="listagem-idea-tags">
 
                     <span className="listagem-category-tag">
-                      {ideia.categoria}
+                      {ideia.categoria?.nome || 'Sem categoria'}
                     </span>
 
                     <span
@@ -331,7 +258,7 @@ function Listagem() {
 
                   {/* Título */}
 
-                  <Link to='/detalhe' className='listagem-idea-title'>{ideia.titulo}</Link>
+                  <Link to={`/detalhe/${ideia.id}`} className='listagem-idea-title'>{ideia.titulo}</Link>
 
                   {/* Descrição */}
 
@@ -351,18 +278,18 @@ function Listagem() {
                       </span>
 
                       <strong>
-                        {ideia.autor}
+                        {ideia.autora?.nome || 'Usuária'}
                       </strong>
 
                       <span>
-                        {' · '}{ideia.data}
+                        {' · '}{new Date(ideia.createdAt).toLocaleDateString('pt-BR')}
                       </span>
 
                     </div>
 
 
                     <span className="listagem-idea-comments">
-                      💬 {ideia.comentarios} comentários
+                      💬 Ver comentários
                     </span>
 
                   </div>
@@ -393,29 +320,13 @@ function Listagem() {
               </div>
 
               <div className='listagem-ranking-list'>
-                  <div className='listagem-ranking-item'>
-                    <span className='listagem-ranking-position destaque'>1</span>
-                    <span className='listagem-ranking-title'>Oficina de introdução ao Scratch</span>
-                    <span className='listagem-ranking-votes'>42</span>
+                {ranking.slice(0,4).map((i, index) => (
+                  <div key={i.id} className='listagem-ranking-item'>
+                    <span className='listagem-ranking-position'>{index + 1}</span>
+                    <Link to={`/detalhe/${i.id}`} className='listagem-ranking-title'>{i.titulo}</Link>
+                    <span className='listagem-ranking-votes'>{i.votos}</span>
                   </div>
-
-                  <div className='listagem-ranking-item'>
-                    <span className='listagem-ranking-position destaque-2'>2</span>
-                    <span className='listagem-ranking-title'>Mulheres pioneiras na Computação</span>
-                    <span className='listagem-ranking-votes'>37</span>  
-                  </div>
-
-                  <div className='listagem-ranking-item'>
-                    <span className='listagem-ranking-position destaque-3'>3</span>
-                    <span className='listagem-ranking-title'>Construindo um site em grupo</span>
-                    <span className='listagem-ranking-votes'>29</span>  
-                  </div>
-
-                  <div className='listagem-ranking-item'>
-                    <span className='listagem-ranking-position destaque-4'>4</span>
-                    <span className='listagem-ranking-title'>Kit materiais de lógica</span>
-                    <span className='listagem-ranking-votes'>21</span>  
-                  </div>
+                ))}
               </div>
             </div>
 
@@ -432,22 +343,22 @@ function Listagem() {
               <div className='listagem-status-list'>
                 <div className='listagem-status-item'>
                   <span className='status-analysis'>● Em análise</span>
-                  <strong>9</strong>
+                  <strong>{ideias.filter(i => i.status === 'Em análise').length}</strong>
                 </div>
 
                 <div className='listagem-status-item'>
                   <span className='status-approved'>● Aprovada</span>
-                  <strong>12</strong>
+                  <strong>{ideias.filter(i => i.status === 'Aprovada').length}</strong>
                 </div>
 
                 <div className='listagem-status-item'>
                   <span className='status-running'>● Em execução</span>
-                  <strong>4</strong>
+                  <strong>{ideias.filter(i => i.status === 'Em execução').length}</strong>
                 </div>
 
                 <div className='listagem-status-item'>
                   <span className='status-completed'>● Concluída</span>
-                  <strong>3</strong>
+                  <strong>{ideias.filter(i => i.status === 'Concluída').length}</strong>
                 </div>
               </div>
             </div>

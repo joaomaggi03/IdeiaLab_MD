@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { api, salvarSessao } from '../../services/api'
 import './Login.css'
 import logoIdeiaLab from '../../assets/logo-ideialab.png'
 
@@ -8,6 +11,20 @@ import logoIdeiaLab from '../../assets/logo-ideialab.png'
 // =====================================================
 
 function Login() {
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
+  const [erro, setErro] = useState('')
+  const [enviando, setEnviando] = useState(false)
+  async function entrar(event) {
+    event.preventDefault()
+    setErro(''); setEnviando(true)
+    try {
+      const dados = await api('/auth/login', { method: 'POST', body: JSON.stringify({ email, senha }) })
+      salvarSessao(dados)
+      navigate('/listagem', { replace: true })
+    } catch (e) { setErro(e.message) } finally { setEnviando(false) }
+  }
   return (
     // ===================================================
     // ESTRUTURA PRINCIPAL DA PÁGINA
@@ -129,7 +146,7 @@ function Login() {
             Área central com os conteúdos do login
             ================================================= */}
         
-        <div className='login-form-container'>
+        <form className='login-form-container' onSubmit={entrar}>
           {/*------ CABEÇALHO DO FORMULARIO ------*/}
 
           <div className='login-form-header'>
@@ -148,7 +165,7 @@ function Login() {
             <label className='login-form-label'htmlFor='email'>E-mail</label>
 
             {/*Campo de entrada*/}
-            <input id='email' className='login-form-input' type='email' placeholder='voce@email.com'>
+            <input id='email' className='login-form-input' type='email' placeholder='voce@email.com' value={email} onChange={e => setEmail(e.target.value)} required value={email} onChange={e => setEmail(e.target.value)} required>
             </input>
           </div>
           
@@ -159,13 +176,13 @@ function Login() {
             {/*Campo de senha*/}
             <div className='login-form-field'>
               <label className='login-form-label'htmlFor='password'>Senha</label>
-              <input id='password'className='login-form-input'type='password'placeholder='••••••••'>
+              <input id='password'className='login-form-input'type='password'placeholder='••••••••' value={senha} onChange={e => setSenha(e.target.value)} required value={senha} onChange={e => setSenha(e.target.value)} required>
               </input>
             </div>
 
             {/*Link para recuperar senha*/}
             <div className='login-forgot-password-wrapper'>
-              <a className='login-forgot-password'href='#'>Esqueci minha senha</a>
+              <span className='login-forgot-password' title='Recuperação de senha ainda não implementada'>Esqueci minha senha</span>
             </div>
             
           </div>
@@ -173,7 +190,8 @@ function Login() {
           {/* =================================================
             BOTÃO DE LOGIN
             ================================================= */}
-          <button className='login-submit-button'type='submit'>Entrar</button>
+          {erro && <p role='alert' style={{color:'crimson'}}>{erro}</p>}
+          <button className='login-submit-button'type='submit' disabled={enviando}>{enviando ? 'Entrando...' : 'Entrar'}</button>
 
           {/* =================================================
             DIVISOR
@@ -194,7 +212,7 @@ function Login() {
           </div>
           
 
-        </div>
+        </form>
         
       </section>
 
