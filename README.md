@@ -1,167 +1,171 @@
 # 💡 IdeiaLab MD
 
-> Banco de Ideias para o Projeto de Extensão **Meninas Digitais** (UTFPR)
+**Banco de ideias para o projeto de extensão Meninas Digitais — UTFPR**
 
-O **IdeiaLab MD** é uma aplicação web que visa **centralizar, organizar e priorizar** as ideias de atividades, oficinas, dinâmicas e conteúdos propostos para o projeto de extensão *Meninas Digitais* da UTFPR — projeto que tem como objetivo aproximar meninas e adolescentes da área de tecnologia.
+O IdeiaLab MD é uma aplicação web colaborativa para reunir, organizar e priorizar propostas de oficinas, palestras, dinâmicas e outras ações do projeto Meninas Digitais. As integrantes podem cadastrar ideias, votar, comentar e acompanhar o andamento das propostas. A coordenação pode gerenciar categorias, usuários e o status das ideias.
 
-O sistema ajuda a coordenação e as voluntárias a reunir em um único lugar as ideias sugeridas pela equipe, permitindo que sejam **discutidas, votadas e priorizadas** de forma colaborativa — desde o registro da ideia até a definição de quais atividades serão efetivamente realizadas com as participantes.
+## Funcionalidades
 
----
+- Cadastro e autenticação de usuários com JWT; níveis de acesso **membro** e **admin**.
+- Cadastro, listagem, pesquisa, edição e exclusão lógica de ideias.
+- Votação com um voto por usuário em cada ideia, remoção do voto e ranking de propostas.
+- Comentários nas ideias.
+- Edição de nome, e-mail e senha pelo próprio usuário.
+- Painel administrativo com alteração do status das ideias, gerenciamento de categorias e permissões de usuários.
+- Encerramento da sessão (logout).
 
-## 📑 Sumário
+**Status de uma ideia:** Em análise → Aprovada → Em execução → Concluída.
 
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Funcionalidades](#-funcionalidades)
-- [Perfis de Usuário](#-perfis-de-usuário)
-- [Tecnologias](#-tecnologias)
-- [Como Executar](#-como-executar)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Divisão do Desenvolvimento](#-divisão-do-desenvolvimento)
-- [Equipe](#-equipe)
+## Tecnologias
 
----
+| Camada | Tecnologias |
+| --- | --- |
+| Front-end | React, Vite, React Router |
+| Back-end | Node.js, Express, Sequelize, JWT |
+| Banco de dados | PostgreSQL |
+| Ferramentas de desenvolvimento | VS Code, Git, GitHub, Thunder Client, Figma |
 
-## 📖 Sobre o Projeto
+## Pré-requisitos
 
-O que o IdeiaLab MD pretende atender:
+- Node.js e npm compatíveis com a versão do Vite definida em `frontend/package.json`.
+- PostgreSQL instalado e em execução.
+- Git, caso queira clonar o repositório.
 
-- 🗂️ **Centralizar** em um único espaço as ideias de atividades, oficinas e dinâmicas propostas para o projeto.
-- 🗳️ **Priorizar** as ideias por meio de votação, indicando o interesse coletivo em cada proposta.
-- 📝 **Registrar de forma estruturada** as sugestões da equipe, complementando as trocas informais feitas hoje pelo WhatsApp.
-- 👀 **Dar visibilidade** ao status de cada ideia (em análise, aprovada, em execução ou concluída) para todas as integrantes envolvidas.
+> O projeto foi testado localmente. Para uso em produção, ainda são necessárias configurações próprias de implantação, segurança e operação.
 
----
+## Como executar localmente
 
-## ✨ Funcionalidades
-
-| Módulo | Descrição |
-|--------|-----------|
-| **Controle de Ideias** | Cadastrar, listar, atualizar e excluir (exclusão lógica) ideias de atividades. Cada ideia possui código, título, descrição, categoria, público-alvo, autora, data de cadastro e status. |
-| **Votação e Priorização** | Votação nas ideias cadastradas com atualização automática da contagem de votos e ranking das ideias mais votadas. |
-| **Comentários em Ideias** | Registro de comentários nas ideias para discutir detalhes, sugerir melhorias e esclarecer dúvidas. |
-| **Gerenciamento de Categorias** | Administradores podem cadastrar, listar, atualizar e excluir categorias (ex.: oficinas, palestras, dinâmicas e materiais). |
-| **Gerenciamento de Usuários** | Cadastro de usuários com diferentes níveis de permissão, garantindo segurança e controle de acesso. |
-
----
-
-## 👥 Perfis de Usuário
-
-- **Administradores (Coordenação do Projeto):** acesso total às funcionalidades, incluindo controle de ideias, usuários, categorias e definição do status das ideias.
-- **Membros do Projeto e Voluntárias:** permissões limitadas — podem cadastrar novas ideias, comentar e votar nas ideias existentes, sem acesso às configurações avançadas.
-
----
-
-## 🛠️ Tecnologias
-
-**Front-end**
-- [React](https://react.dev/)
-
-**Back-end**
-- [Node.js](https://nodejs.org/)
-- [Express.js](https://expressjs.com/)
-
-**Banco de Dados**
-- [PostgreSQL](https://www.postgresql.org/)
-- [Sequelize](https://sequelize.org/) (ORM)
-
-**Ferramentas**
-- [Visual Studio Code](https://code.visualstudio.com/) (IDE)
-- [Figma](https://figma.com/) (design das telas)
-- [GitHub](https://github.com/) (versionamento)
-
----
-
-## 🚀 Como Executar
-
-> **Pré-requisitos:** [Node.js](https://nodejs.org/) e [PostgreSQL](https://www.postgresql.org/) instalados.
-
-### 1. Clonar o repositório
+### 1. Obter o projeto
 
 ```bash
 git clone https://github.com/joaomaggi03/IdeiaLab_MD.git
 cd IdeiaLab_MD
 ```
 
-### 2. Configurar o Back-end
+### 2. Criar o banco de dados
+
+Crie um banco PostgreSQL vazio chamado `ideialab_md_final` (ou outro nome de sua preferência). Em seguida, execute, **uma única vez**, os scripts abaixo, **nessa ordem**:
+
+1. `database/first_query.sql` — cria os tipos, tabelas e índices.
+2. `database/seeding.sql` — opcional; insere dados fictícios para demonstração.
+
+Exemplo com `psql`, executado na raiz do projeto:
+
+```bash
+psql -U postgres -d postgres -c "CREATE DATABASE ideialab_md_final;"
+psql -U postgres -d ideialab_md_final -v ON_ERROR_STOP=1 -f database/first_query.sql
+psql -U postgres -d ideialab_md_final -v ON_ERROR_STOP=1 -f database/seeding.sql
+```
+
+No Windows, caso `psql` não seja reconhecido, utilize o executável do PostgreSQL instalado; por exemplo, no PowerShell com PostgreSQL 18:
+
+```powershell
+& "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d postgres -c "CREATE DATABASE ideialab_md_final;"
+& "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d ideialab_md_final -v ON_ERROR_STOP=1 -f database/first_query.sql
+& "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d ideialab_md_final -v ON_ERROR_STOP=1 -f database/seeding.sql
+```
+
+Ajuste o caminho conforme a versão instalada. Não execute `first_query.sql` sobre um banco que já possui as tabelas. Mais detalhes em [`database/README_EXECUCAO.md`](database/README_EXECUCAO.md).
+
+### 3. Configurar o back-end
+
+Na pasta `backend`, copie `.env.example` para `.env` e ajuste as variáveis conforme seu computador:
+
+```env
+NODE_ENV=development
+PORT=3001
+FRONTEND_URL=http://localhost:5173
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=ideialab_md_final
+DB_USER=postgres
+DB_PASSWORD=SUA_SENHA_LOCAL
+JWT_SECRET=DEFINA_UMA_CHAVE_ALEATORIA_COM_PELO_MENOS_32_CARACTERES
+DB_SYNC=false
+```
+
+**Nunca publique o arquivo `.env` ou credenciais reais.** Mantenha `DB_SYNC=false` porque as tabelas já foram criadas pelo SQL.
+
+Execute em um terminal:
 
 ```bash
 cd backend
 npm install
-```
-
-Crie um arquivo `.env` na pasta do back-end com as credenciais do banco:
-
-```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=ideialab_md
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-PORT=3000
-```
-
-Inicie o servidor:
-
-```bash
 npm start
 ```
 
-### 3. Configurar o Front-end
+API: **http://localhost:3001/api**  
+Verificação: **http://localhost:3001/api/health**
+
+### 4. Configurar o front-end
+
+Abra **outro terminal** na pasta `frontend`. Se necessário, copie `frontend/.env.example` para `frontend/.env` e mantenha:
+
+```env
+VITE_API_URL=http://localhost:3001/api
+```
+
+Execute:
 
 ```bash
 cd frontend
 npm install
-npm start
+npm run dev
 ```
 
-A aplicação estará disponível no navegador (por padrão em `http://localhost:3000`).
+Abra **http://localhost:5173/** no navegador. Deixe os dois terminais em execução.
 
-> ℹ️ Os comandos e caminhos acima são um modelo padrão para uma stack Node.js + React. Ajuste conforme a estrutura real do repositório à medida que o projeto for desenvolvido.
+### 5. Contas e administração
 
----
+- O cadastro público cria um **membro**, não um administrador.
+- Para demonstração, o `seeding.sql` cria contas fictícias; as orientações e a senha **exclusivamente de teste** estão em [`database/README_EXECUCAO.md`](database/README_EXECUCAO.md).
+- Para criar uma conta administradora própria, utilize o comando `npm run admin:init` na pasta `backend` com as variáveis `ADMIN_NOME`, `ADMIN_EMAIL` e `ADMIN_PASSWORD`, conforme descrito no guia do banco.
 
-## 📁 Estrutura do Projeto
+**Não reutilize contas ou senhas de demonstração em produção.**
 
-```
+## Problemas conhecidos de configuração
+
+- **`psql` não reconhecido:** utilize o caminho completo de `psql.exe` no Windows ou adicione a pasta `bin` do PostgreSQL ao `PATH`.
+- **Erro de conexão ao banco:** confira serviço do PostgreSQL, nome do banco e credenciais em `backend/.env`.
+- **Erro de autenticação:** confirme a existência de uma conta válida e que `JWT_SECRET` foi definido no back-end.
+- **Caracteres acentuados incorretos após importar o SQL:** verifique a codificação UTF-8 do arquivo e da sessão `psql`. Para bases de demonstração já importadas com caracteres corrompidos, há scripts de correção em `database/corrigir_acentos_ideialab.sql` e `database/corrigir_status_ideialab.sql`. Use-os somente se o problema ocorrer, preferencialmente após backup.
+
+## Estrutura do repositório
+
+```text
 IdeiaLab_MD/
-├── backend/          # API (Node.js + Express + Sequelize)
-│   ├── models/       # Modelos do banco de dados
-│   ├── routes/       # Rotas da API
-│   └── controllers/  # Lógica de negócios
-├── frontend/         # Aplicação React
+├── backend/
 │   ├── src/
-│   │   ├── components/
-│   │   └── pages/
+│   │   ├── config/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   └── server.js
+│   ├── scripts/
+│   ├── .env.example
+│   └── package.json
+├── database/
+│   ├── first_query.sql
+│   ├── seeding.sql
+│   └── README_EXECUCAO.md
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   └── services/
+│   ├── .env.example
+│   └── package.json
 └── README.md
 ```
 
-> A estrutura acima é uma sugestão inicial e pode ser adaptada ao longo do desenvolvimento.
+## Divisão do trabalho
 
----
+O desenvolvimento envolveu design e front-end React, API e integração com a interface, e modelagem do banco PostgreSQL. As alterações foram organizadas em branches no GitHub e incorporadas à `main` por Pull Requests.
 
-## 🧩 Divisão do Desenvolvimento
+**Equipe:** João Lucas Maggi, Gabriel Henrique Scarduelli, Claudinei Soares Júnior, Rafael Romanelo e Filipe Nogueira.
 
-O desenvolvimento foi dividido em **3 partes básicas**, com tarefas fragmentadas e atribuídas individualmente:
+Projeto acadêmico da disciplina **Certificadora de Competência Identitária** — 2026.
 
-- **Front-end** — design das telas (Figma) e desenvolvimento (React), incluindo integração com a API.
-- **Back-end** — criação da API (métodos GET, POST, PUT e DELETE) para ideias, categorias, votação e comentários, além das rotas e conexão com o front-end.
-- **Banco de Dados** — modelagem (diagramas de entidades e relacionamentos), implementação dos modelos no código e integração com as funcionalidades.
+## Referências internas
 
-> Embora cada tarefa esteja atribuída a uma pessoa, todos poderão transitar entre as partes conforme a necessidade, visando um melhor aprendizado de todos os integrantes.
-
----
-
-## 👨‍💻 Equipe
-
-- João Lucas Maggi
-- Gabriel Henrique Scarduelli
-- Claudinei Soares Júnior
-- Rafael Romanelo
-
----
-
-## 🎓 Contexto Acadêmico
-
-Projeto desenvolvido na disciplina **Certificadora de Competência Identitária**.
-
-**Paraná — 2026**
+- [Documentação do back-end e endpoints](backend/README_BACKEND.md)
+- [Guia de execução do banco de dados](database/README_EXECUCAO.md)
