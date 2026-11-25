@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { api, getUsuario, sair } from '../../services/api'
 import {Link, useNavigate} from 'react-router-dom'
 import './NovaIdeia.css'
 import logoIdeiaLab from '../../assets/logo-ideialab.png'
@@ -9,6 +11,12 @@ import logoIdeiaLab from '../../assets/logo-ideialab.png'
 
 function NovaIdeia(){
     const navigate = useNavigate()
+    const usuario = getUsuario()
+    function encerrarSessao() { sair(); navigate('/login', {replace:true}) }
+    const [categorias, setCategorias] = useState([])
+    const [erro, setErro] = useState('')
+    const [salvando, setSalvando] = useState(false)
+    useEffect(() => { api('/categorias').then(setCategorias).catch(e => setErro(e.message)) }, [])
 
     //volta para a tela de listagem ao cancelar o cadastro
     function cancelarCadastro(){
@@ -16,8 +24,17 @@ function NovaIdeia(){
     }
 
     //validação com o back será implementado depois
-    function cadastrarIdeia(event){
+    async function cadastrarIdeia(event){
         event.preventDefault()
+        const dados = new FormData(event.currentTarget)
+        setErro(''); setSalvando(true)
+        try {
+            const ideia = await api('/ideias', { method:'POST', body:JSON.stringify({
+                titulo:dados.get('titulo'), descricao:dados.get('descricao'),
+                publicoAlvo:dados.get('publicoAlvo'), categoriaId:Number(dados.get('categoria'))
+            }) })
+            navigate(`/detalhe/${ideia.id}`)
+        } catch(e) { setErro(e.message) } finally { setSalvando(false) }
     }
 
     return(
@@ -40,15 +57,17 @@ function NovaIdeia(){
                 <nav className='nova-ideia-navigation'>
                     <Link to='/listagem' className='nova-ideia-nav-link'>Ideias</Link>
                     <Link to='/nova-ideia' className='nova-ideia-nav-link active'>Nova ideia</Link>
-                    <Link to='/admin' className='nova-ideia-nav-link'>Admin</Link>
+                    <Link to='/perfil' className='nova-ideia-nav-link'>Perfil</Link>
+                    {usuario?.perfil === 'admin' && <Link to='/admin' className='nova-ideia-nav-link'>Admin</Link>}
+                    <button type="button" className="nova-ideia-nav-link" style={{border:0,background:'none',cursor:'pointer'}} onClick={encerrarSessao}>Sair</button>
                 </nav>
 
                 {/*------ Usuario representado no prototipo ------*/}
                 <div className='nova-ideia-user'>
-                    <div className='nova-ideia-user-avatar'>MA</div>
+                    <div className='nova-ideia-user-avatar'>{(usuario?.nome || 'U').slice(0,2).toUpperCase()}</div>
                     <div className='nova-ideia-user-info'>
-                        <span className='nova-ideia-user-name'>Marina Alves</span>
-                        <span className='nova-ideia-user-role'>Voluntária</span>
+                        <span className='nova-ideia-user-name'>{usuario?.nome || 'Usuária'}</span>
+                        <span className='nova-ideia-user-role'>{usuario?.perfil === 'admin' ? 'Administração' : 'Voluntária'}</span>
                     </div>
                 </div>
             </header>
@@ -94,11 +113,9 @@ function NovaIdeia(){
                             <div className='nova-ideia-field'>
                                 <label htmlFor='categoria-ideia'>Categoria</label>
                                 <select id='categoria-ideia' name='categoria' 
-                                defaultValue='Oficinas' required>
-                                    <option value="Oficinas">Oficinas</option>
-                                    <option value="Palestras">Palestras</option>
-                                    <option value="Dinâmicas">Dinâmicas</option>
-                                    <option value="Materiais">Materiais</option>
+                                defaultValue='' required>
+                                    <option value='' disabled>Selecione a categoria</option>
+                                    {categorias.map(c => <option key={c.id} value={c.id}>{c.nome}</option>)}
                                 </select>
                             </div>
 
@@ -119,10 +136,11 @@ function NovaIdeia(){
                             </p>
                         </div>
 
+                        {erro && <p role='alert' style={{color:'crimson'}}>{erro}</p>}
                         {/*Botões do formulário*/}
                         <div className='nova-ideia-form-actions'>
-                            <button type='button' className='nova-ideia-cancel-button'>Cancelar</button>
-                            <button type='submit' className='nova-ideia-submit-button'>Cadastrar ideia</button>
+                            <button type='button' className='nova-ideia-cancel-button' onClick={cancelarCadastro}>Cancelar</button>
+                            <button type='submit' className='nova-ideia-submit-button' disabled={salvando}>{salvando ? 'Salvando...' : 'Cadastrar ideia'}</button>
                         </div>
                     </form>
                 </div>

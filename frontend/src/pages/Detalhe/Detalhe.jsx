@@ -1,66 +1,75 @@
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { api, getUsuario, sair } from '../../services/api'
 import {Link} from 'react-router-dom'
 import './Detalhe.css'
-import logoIdeiaLab from '../../assets/logo-ideiaLab.png'
+import logoIdeiaLab from '../../assets/logo-ideialab.png'
 
-// =====================================================
-// DADOS FICTÍCIOS
-// =====================================================
-// Estes dados representam uma ideia cadastrada.
-// Posteriormente, serão recebidos através da API.
-// =====================================================
-
-const ideia = {
-  categoria: 'Oficinas',
-  status: 'Aprovada',
-  titulo: 'Oficina de introdução ao Scratch',
-  autora: 'Marina Alves',
-  iniciaisAutora: 'MA',
-  data: '12/set/2026',
-  descricao:
-    'Atividade prática de 2 horas em que as participantes constroem seus primeiros jogos usando a programação em blocos do Scratch. A proposta é apresentar conceitos de lógica — sequência, repetição e eventos — de forma lúdica, com um projeto que cada menina leva pronto para casa. Ideal para o primeiro contato com programação.',
-  publicoAlvo: '11 a 14 anos',
-  codigo: '#IDL-0042',
-  votos: 42,
-}
-
-
-// =====================================================
-// COMENTÁRIOS FICTÍCIOS
-// =====================================================
-
-const comentarios = [
-  {
-    id: 1,
-    iniciais: 'BC',
-    nome: 'Bruna Costa',
-    data: '13/set',
-    cor: 'roxo',
-    texto:
-      'Ótima ideia! Podemos reservar o laboratório 2, que já tem o Scratch instalado nos computadores.',
-  },
-
-  {
-    id: 2,
-    iniciais: 'LS',
-    nome: 'Letícia Souza',
-    data: '13/set',
-    cor: 'rosa',
-    texto:
-      'Sugiro dividir em duas turmas pequenas para dar atenção individual. Posso ajudar como monitora.',
-  },
-
-  {
-    id: 3,
-    iniciais: 'AP',
-    nome: 'Ana Paula Reis',
-    data: '14/set',
-    cor: 'rosa-claro',
-    texto:
-      'Combina bem com o kit de lógica que propus — dá pra usar como aquecimento antes da oficina.',
-  },
-]
+function transformarIdeia(i) { return {
+  ...i, categoria:i.categoria?.nome || 'Sem categoria', autora:i.autora?.nome || '',
+  iniciaisAutora:(i.autora?.nome || 'U').slice(0,2).toUpperCase(),
+  data:new Date(i.createdAt).toLocaleDateString('pt-BR')
+} }
 
 function Detalhe(){
+    const { id } = useParams()
+    const navigate = useNavigate()
+    function encerrarSessao() { sair(); navigate('/login', {replace:true}) }
+    const [ideia,setIdeia] = useState(null)
+    const [comentarios,setComentarios] = useState([])
+    const [meuVoto,setMeuVoto] = useState(false)
+    const [texto,setTexto] = useState('')
+    const [erro,setErro] = useState('')
+    const usuario = getUsuario()
+    useEffect(() => {
+        if (!id) return
+        Promise.all([api(`/ideias/${id}`),api(`/ideias/${id}/comentarios`),api(`/ideias/${id}/votos`)])
+          .then(([i,c,v]) => { setIdeia(transformarIdeia(i)); setComentarios(c); setMeuVoto(v.meuVoto) })
+          .catch(e => setErro(e.message))
+    },[id])
+    async function votar() {
+        try {
+            const v = await api(`/ideias/${id}/votos`, {method:meuVoto ? 'DELETE':'POST', ...(!meuVoto ? {body:'{}'}:{})})
+            setMeuVoto(v.meuVoto);setIdeia(i => ({...i,votos:v.votos}));setErro('')
+        } catch(e) {setErro(e.message)}
+    }
+    async function comentar() {
+        try {
+            await api(`/ideias/${id}/comentarios`, {method:'POST',body:JSON.stringify({texto})})
+            setComentarios(await api(`/ideias/${id}/comentarios`));setTexto('');setErro('')
+        } catch(e) {setErro(e.message)}
+    }
+    async function editarComentario(comentario) {
+        const novoTexto = window.prompt('Editar comentário:', comentario.texto)
+        if (novoTexto === null) return
+        try {
+            await api(`/comentarios/${comentario.id}`, {method:'PUT',body:JSON.stringify({texto:novoTexto})})
+            setComentarios(await api(`/ideias/${id}/comentarios`)); setErro('')
+        } catch (e) { setErro(e.message) }
+    }
+    async function excluirComentario(comentario) {
+        if (!window.confirm('Excluir este comentário?')) return
+        try {
+            await api(`/comentarios/${comentario.id}`, {method:'DELETE'})
+            setComentarios(await api(`/ideias/${id}/comentarios`)); setErro('')
+        } catch (e) { setErro(e.message) }
+    }
+    async function editarIdeia() {
+        const titulo = window.prompt('Título:', ideia.titulo)
+        if (titulo === null) return
+        const descricao = window.prompt('Descrição:', ideia.descricao)
+        if (descricao === null) return
+        try {
+            const atualizada = await api(`/ideias/${id}`, {method:'PUT',body:JSON.stringify({titulo,descricao})})
+            setIdeia(transformarIdeia(atualizada)); setErro('')
+        } catch (e) { setErro(e.message) }
+    }
+    async function excluirIdeia() {
+        if (!window.confirm('Excluir esta ideia?')) return
+        try { await api(`/ideias/${id}`, {method:'DELETE'}); navigate('/listagem') }
+        catch (e) { setErro(e.message) }
+    }
+    if (!ideia) return <main style={{padding:32}}>{erro || 'Carregando ideia...'}</main>
     return(
         <div className='detalhe-page'>
             <header className='detalhe-header'>
@@ -75,15 +84,17 @@ function Detalhe(){
                 <nav className='detalhe-navigation'>
                     <Link to='/listagem' className='detalhe-nav-link active'>Ideias</Link>
                     <Link to='/nova-ideia' className='detalhe-nav-link'>Nova ideia</Link>
-                    <Link to='/admin' className='detalhe-nav-link'>Admin</Link>
+                    <Link to='/perfil' className='detalhe-nav-link'>Perfil</Link>
+                    {usuario?.perfil === 'admin' && <Link to='/admin' className='detalhe-nav-link'>Admin</Link>}
+                    <button type="button" className="detalhe-nav-link" style={{background:'none',border:0,cursor:'pointer'}} onClick={encerrarSessao}>Sair</button>
                 </nav>
 
                 {/*------ Usuario ------*/}
                 <div className='detalhe-user'>
-                    <div className='detalhe-user-avatar'>MA</div>
+                    <div className='detalhe-user-avatar'>{(usuario?.nome || 'U').slice(0,2).toUpperCase()}</div>
                     <div className='detalhe-user-info'>
-                        <span className='detalhe-user-name'>Marina Alves</span>
-                        <span className='detalhe-user-role'>Voluntária</span>
+                        <span className='detalhe-user-name'>{usuario?.nome || 'Usuária'}</span>
+                        <span className='detalhe-user-role'>{usuario?.perfil === 'admin' ? 'Administração' : 'Voluntária'}</span>
                     </div>
                 </div>
             </header>
@@ -99,6 +110,7 @@ function Detalhe(){
                     AREA PRINCIPAL
                 ===================================================== */}
 
+                {erro && <p role='alert' style={{color:'crimson'}}>{erro}</p>}
                 <div className='detalhe-main-area'>
                     {/*------ COLUNA ESQUERDA ------*/}
                     <section className='detalhe-left-column'>
@@ -114,6 +126,10 @@ function Detalhe(){
 
                             {/*------ Titulo ------*/}
                             <h1 className='detalhe-idea-title'>{ideia.titulo}</h1>
+                            {(usuario?.id === ideia.autoraId || usuario?.perfil === 'admin') && <div style={{display:'flex',gap:8,marginBottom:12}}>
+                              <button type="button" onClick={editarIdeia}>Editar ideia</button>
+                              <button type="button" onClick={excluirIdeia}>Excluir ideia</button>
+                            </div>}
 
                             {/*------ Autora ------*/}
                             <div className='detalhe-author'>
@@ -156,16 +172,16 @@ function Detalhe(){
                             {/*------ Título ------*/}
                             <h2 className='detalhe-comments-title'>
                                 Comentários{' '}
-                                <span>(8)</span>
+                                <span>({comentarios.length})</span>
                             </h2>
 
                             {/*------ Novo comentario ------*/}
                             <div className='detalhe-comment-form'>
-                                <div className='detalhe-comment-avatar'>MA</div>
+                                <div className='detalhe-comment-avatar'>{(usuario?.nome || 'U').slice(0,2).toUpperCase()}</div>
                                 <div className='detalhe-comment-form-content'>
-                                    <textarea placeholder='Escreva um comentário...' />
+                                    <textarea placeholder='Escreva um comentário...' value={texto} onChange={e => setTexto(e.target.value)} />
                                     <div className='detalhe-comment-button-wrapper'>
-                                        <button type='button' className='detalhe-comment-button'>Comentar</button>
+                                        <button type='button' className='detalhe-comment-button' onClick={comentar} disabled={!texto.trim()}>Comentar</button>
                                     </div>
                                 </div>
                             </div>
@@ -177,14 +193,18 @@ function Detalhe(){
                             <div className='detalhe-comments-list'>
                                 {comentarios.map((comentario)=>(
                                     <article key={comentario.id} className='detalhe-comment'>
-                                        <div className={`detalhe-comment-avatar ${comentario.cor}`}>{comentario.iniciais}</div>
+                                        <div className='detalhe-comment-avatar'>{(comentario.usuario?.nome || 'U').slice(0,2).toUpperCase()}</div>
                                         <div className='detalhe-comment-content'>
                                             <div className='detalhe-comment-header'>
-                                                <strong>{comentario.nome}</strong>
-                                                <span>· {comentario.data}</span>
+                                                <strong>{comentario.usuario?.nome || 'Usuária'}</strong>
+                                                <span>· {new Date(comentario.createdAt).toLocaleDateString('pt-BR')}</span>
                                             </div>
 
                                             <p>{comentario.texto}</p>
+                                            {(usuario?.id === comentario.usuarioId || usuario?.perfil === 'admin') && <div style={{display:'flex',gap:8}}>
+                                                <button type="button" onClick={()=>editarComentario(comentario)}>Editar</button>
+                                                <button type="button" onClick={()=>excluirComentario(comentario)}>Excluir</button>
+                                            </div>}
                                         </div>
                                     </article>
                                 ))}
@@ -205,8 +225,8 @@ function Detalhe(){
                         <div className='detalhe-vote-card'>
                             <span className='detalhe-vote-label'>Priorize esta ideia</span>
                             <strong className='detalhe-vote-number'>{ideia.votos}</strong>
-                            <span className='detalhe-vote-info'>votos · 2º no ranking</span>
-                            <button type='button' className='detalhe-vote-button'>▲ Votar nesta ideia</button>
+                            <span className='detalhe-vote-info'>votos</span>
+                            <button type='button' className='detalhe-vote-button' onClick={votar}>{meuVoto ? 'Retirar meu voto' : '▲ Votar nesta ideia'}</button>
                             <span className='detalhe-vote-note'>
                                 Cada pessoa pode votar uma vez por ideia
                             </span>
@@ -219,27 +239,27 @@ function Detalhe(){
                             <h2>Informações</h2>
                             <div className='detalhe-info-row'>
                                 <span>Status</span>
-                                <strong className='detalhe-info-status'>Aprovada</strong>
+                                <strong className='detalhe-info-status'>{ideia.status}</strong>
                             </div>
 
                             <div className='detalhe-info-row'>
                                 <span>Categoria</span>
-                                <strong>Oficinas</strong>
+                                <strong>{ideia.categoria}</strong>
                             </div>
 
                             <div className='detalhe-info-row'>
                                 <span>Público-alvo</span>
-                                <strong>11-14 anos</strong>
+                                <strong>{ideia.publicoAlvo}</strong>
                             </div>
 
                             <div className='detalhe-info-row'>
                                 <span>Autora</span>
-                                <strong>Marina Alves</strong>
+                                <strong>{ideia.autora}</strong>
                             </div>
 
                             <div className='detalhe-info-row'>
                                 <span>Cadastro</span>
-                                <strong>12/set/2026</strong>
+                                <strong>{ideia.data}</strong>
                             </div>
                         </div>
                             
