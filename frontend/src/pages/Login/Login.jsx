@@ -165,7 +165,7 @@ function Login() {
             <label className='login-form-label'htmlFor='email'>E-mail</label>
 
             {/*Campo de entrada*/}
-            <input id='email' className='login-form-input' type='email' placeholder='voce@email.com' value={email} onChange={e => setEmail(e.target.value)} required value={email} onChange={e => setEmail(e.target.value)} required>
+            <input id='email' className='login-form-input' type='email' placeholder='voce@email.com' value={email} onChange={e => setEmail(e.target.value)} autoComplete='username' required>
             </input>
           </div>
           
@@ -176,7 +176,7 @@ function Login() {
             {/*Campo de senha*/}
             <div className='login-form-field'>
               <label className='login-form-label'htmlFor='password'>Senha</label>
-              <input id='password'className='login-form-input'type='password'placeholder='••••••••' value={senha} onChange={e => setSenha(e.target.value)} required value={senha} onChange={e => setSenha(e.target.value)} required>
+              <input id='password'className='login-form-input'type='password'placeholder='••••••••' value={senha} onChange={e => setSenha(e.target.value)} autoComplete='current-password' required>
               </input>
             </div>
 

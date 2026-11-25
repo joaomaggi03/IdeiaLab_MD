@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { api, getUsuario } from '../../services/api'
+import { useNavigate, useParams } from 'react-router-dom'
+import { api, getUsuario, sair } from '../../services/api'
 import {Link} from 'react-router-dom'
 import './Detalhe.css'
 import logoIdeiaLab from '../../assets/logo-ideialab.png'
@@ -13,6 +13,8 @@ function transformarIdeia(i) { return {
 
 function Detalhe(){
     const { id } = useParams()
+    const navigate = useNavigate()
+    function encerrarSessao() { sair(); navigate('/login', {replace:true}) }
     const [ideia,setIdeia] = useState(null)
     const [comentarios,setComentarios] = useState([])
     const [meuVoto,setMeuVoto] = useState(false)
@@ -37,6 +39,36 @@ function Detalhe(){
             setComentarios(await api(`/ideias/${id}/comentarios`));setTexto('');setErro('')
         } catch(e) {setErro(e.message)}
     }
+    async function editarComentario(comentario) {
+        const novoTexto = window.prompt('Editar comentário:', comentario.texto)
+        if (novoTexto === null) return
+        try {
+            await api(`/comentarios/${comentario.id}`, {method:'PUT',body:JSON.stringify({texto:novoTexto})})
+            setComentarios(await api(`/ideias/${id}/comentarios`)); setErro('')
+        } catch (e) { setErro(e.message) }
+    }
+    async function excluirComentario(comentario) {
+        if (!window.confirm('Excluir este comentário?')) return
+        try {
+            await api(`/comentarios/${comentario.id}`, {method:'DELETE'})
+            setComentarios(await api(`/ideias/${id}/comentarios`)); setErro('')
+        } catch (e) { setErro(e.message) }
+    }
+    async function editarIdeia() {
+        const titulo = window.prompt('Título:', ideia.titulo)
+        if (titulo === null) return
+        const descricao = window.prompt('Descrição:', ideia.descricao)
+        if (descricao === null) return
+        try {
+            const atualizada = await api(`/ideias/${id}`, {method:'PUT',body:JSON.stringify({titulo,descricao})})
+            setIdeia(transformarIdeia(atualizada)); setErro('')
+        } catch (e) { setErro(e.message) }
+    }
+    async function excluirIdeia() {
+        if (!window.confirm('Excluir esta ideia?')) return
+        try { await api(`/ideias/${id}`, {method:'DELETE'}); navigate('/listagem') }
+        catch (e) { setErro(e.message) }
+    }
     if (!ideia) return <main style={{padding:32}}>{erro || 'Carregando ideia...'}</main>
     return(
         <div className='detalhe-page'>
@@ -52,7 +84,9 @@ function Detalhe(){
                 <nav className='detalhe-navigation'>
                     <Link to='/listagem' className='detalhe-nav-link active'>Ideias</Link>
                     <Link to='/nova-ideia' className='detalhe-nav-link'>Nova ideia</Link>
-                    <Link to='/admin' className='detalhe-nav-link'>Admin</Link>
+                    <Link to='/perfil' className='detalhe-nav-link'>Perfil</Link>
+                    {usuario?.perfil === 'admin' && <Link to='/admin' className='detalhe-nav-link'>Admin</Link>}
+                    <button type="button" className="detalhe-nav-link" style={{background:'none',border:0,cursor:'pointer'}} onClick={encerrarSessao}>Sair</button>
                 </nav>
 
                 {/*------ Usuario ------*/}
@@ -92,6 +126,10 @@ function Detalhe(){
 
                             {/*------ Titulo ------*/}
                             <h1 className='detalhe-idea-title'>{ideia.titulo}</h1>
+                            {(usuario?.id === ideia.autoraId || usuario?.perfil === 'admin') && <div style={{display:'flex',gap:8,marginBottom:12}}>
+                              <button type="button" onClick={editarIdeia}>Editar ideia</button>
+                              <button type="button" onClick={excluirIdeia}>Excluir ideia</button>
+                            </div>}
 
                             {/*------ Autora ------*/}
                             <div className='detalhe-author'>
@@ -163,6 +201,10 @@ function Detalhe(){
                                             </div>
 
                                             <p>{comentario.texto}</p>
+                                            {(usuario?.id === comentario.usuarioId || usuario?.perfil === 'admin') && <div style={{display:'flex',gap:8}}>
+                                                <button type="button" onClick={()=>editarComentario(comentario)}>Editar</button>
+                                                <button type="button" onClick={()=>excluirComentario(comentario)}>Excluir</button>
+                                            </div>}
                                         </div>
                                     </article>
                                 ))}

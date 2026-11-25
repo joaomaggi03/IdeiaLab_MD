@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { api } from '../../services/api'
+import { api, getUsuario, sair } from '../../services/api'
 import {Link, useNavigate} from 'react-router-dom'
 import './NovaIdeia.css'
 import logoIdeiaLab from '../../assets/logo-ideialab.png'
@@ -11,6 +11,8 @@ import logoIdeiaLab from '../../assets/logo-ideialab.png'
 
 function NovaIdeia(){
     const navigate = useNavigate()
+    const usuario = getUsuario()
+    function encerrarSessao() { sair(); navigate('/login', {replace:true}) }
     const [categorias, setCategorias] = useState([])
     const [erro, setErro] = useState('')
     const [salvando, setSalvando] = useState(false)
@@ -55,15 +57,17 @@ function NovaIdeia(){
                 <nav className='nova-ideia-navigation'>
                     <Link to='/listagem' className='nova-ideia-nav-link'>Ideias</Link>
                     <Link to='/nova-ideia' className='nova-ideia-nav-link active'>Nova ideia</Link>
-                    <Link to='/admin' className='nova-ideia-nav-link'>Admin</Link>
+                    <Link to='/perfil' className='nova-ideia-nav-link'>Perfil</Link>
+                    {usuario?.perfil === 'admin' && <Link to='/admin' className='nova-ideia-nav-link'>Admin</Link>}
+                    <button type="button" className="nova-ideia-nav-link" style={{border:0,background:'none',cursor:'pointer'}} onClick={encerrarSessao}>Sair</button>
                 </nav>
 
                 {/*------ Usuario representado no prototipo ------*/}
                 <div className='nova-ideia-user'>
-                    <div className='nova-ideia-user-avatar'>MA</div>
+                    <div className='nova-ideia-user-avatar'>{(usuario?.nome || 'U').slice(0,2).toUpperCase()}</div>
                     <div className='nova-ideia-user-info'>
-                        <span className='nova-ideia-user-name'>Marina Alves</span>
-                        <span className='nova-ideia-user-role'>Voluntária</span>
+                        <span className='nova-ideia-user-name'>{usuario?.nome || 'Usuária'}</span>
+                        <span className='nova-ideia-user-role'>{usuario?.perfil === 'admin' ? 'Administração' : 'Voluntária'}</span>
                     </div>
                 </div>
             </header>

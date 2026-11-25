@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react'
-import { api, getUsuario } from '../../services/api'
-import { Link } from 'react-router-dom'
+import { api, getUsuario, sair } from '../../services/api'
+import { Link, useNavigate } from 'react-router-dom'
 import './Listagem.css'
 
 import logoIdeiaLab from '../../assets/logo-ideialab.png'
 
 function Listagem() {
+  const navigate = useNavigate()
+  function encerrarSessao() { sair(); navigate('/login', {replace:true}) }
   const [ideias, setIdeias] = useState([])
   const [ranking, setRanking] = useState([])
   const [categorias, setCategorias] = useState([])
   const [categoria, setCategoria] = useState('')
   const [busca, setBusca] = useState('')
+  const [ordem, setOrdem] = useState('votos')
   const [erro, setErro] = useState('')
   const usuario = getUsuario()
   useEffect(() => {
@@ -18,7 +21,7 @@ function Listagem() {
       .then(([itens, cats]) => { setIdeias(itens);setRanking(itens);setCategorias(cats) })
       .catch(e => setErro(e.message))
   }, [])
-  const filtradas = ideias.filter(i => (!categoria || String(i.categoriaId) === categoria) && i.titulo.toLowerCase().includes(busca.toLowerCase()))
+  const filtradas = ideias.filter(i => (!categoria || String(i.categoriaId) === categoria) && i.titulo.toLowerCase().includes(busca.toLowerCase())).sort((a,b) => ordem === 'votos' ? (b.votos-a.votos || b.id-a.id) : (new Date(b.createdAt)-new Date(a.createdAt)))
 
   return (
     <div className="listagem-page">
@@ -66,12 +69,9 @@ function Listagem() {
             Nova ideia
           </Link>
 
-          <Link
-            to="/admin"
-            className="listagem-nav-link"
-          >
-            Admin
-          </Link>
+          <Link to="/perfil" className="listagem-nav-link">Perfil</Link>
+          {usuario?.perfil === 'admin' && <Link to="/admin" className="listagem-nav-link">Admin</Link>}
+          <button type="button" className="listagem-nav-link" onClick={encerrarSessao} style={{border:0,background:'none',cursor:'pointer'}}>Sair</button>
 
         </nav>
 
@@ -130,7 +130,7 @@ function Listagem() {
 
 
           {/* Botão Nova ideia */}
-          <Link to='/nova-ideia' className='listagem=new-idea-button'>Nova ideia</Link>
+          <Link to='/nova-ideia' className='listagem-new-idea-button'>Nova ideia</Link>
 
         </div>
 
@@ -150,7 +150,6 @@ function Listagem() {
               type="text"
               placeholder="Buscar ideias..."
               aria-label="Buscar ideias"
-              value={busca} onChange={e => setBusca(e.target.value)}
               value={busca} onChange={e => setBusca(e.target.value)}
             />
 
@@ -181,8 +180,9 @@ function Listagem() {
             <button
               type="button"
               className="listagem-sort-button"
+              onClick={() => setOrdem(o => o === 'votos' ? 'recentes' : 'votos')}
             >
-              Mais votadas ▾
+              {ordem === 'votos' ? 'Mais votadas' : 'Mais recentes'} ▾
             </button>
 
           </div>

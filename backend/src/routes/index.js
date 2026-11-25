@@ -98,7 +98,7 @@ router.put('/categorias/:id', autenticar, somenteAdmin, ah(async (req,res) => {
 }));
 router.delete('/categorias/:id', autenticar, somenteAdmin, ah(async (req,res) => {
   const c = await buscarCategoria(req.params.id);
-  if (await Ideia.count({ where: { categoriaId:c.id, excluida:false } })) throw httpError(409,'Categoria vinculada a ideias ativas.');
+  if (await Ideia.count({ where: { categoriaId:c.id } })) throw httpError(409,'Categoria vinculada a ideias.');
   await c.destroy(); res.status(204).end();
 }));
 
